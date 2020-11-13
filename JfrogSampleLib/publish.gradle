@@ -1,0 +1,29 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+group 'com.example.jfrogsamplelib'
+version '1.0.0'
+
+
+bintray {
+    //we actually shouldnt expose creds like this
+    user = 'bschiranth1692'
+    key = 'd7f4c31512bdc4fe0b01db05048c110c1783072d'
+    publications = ['Production']
+    configurations = ['archives']
+    override = true
+    pkg {
+        repo = 'JFrogSample'
+        name = 'JFrogSampleLib'
+        description = "to learn artifactory"
+        publicDownloadNumbers = true
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/bschiranth/jfrogsample.git'
+        version {
+            name = this.version
+            desc = "Version ${this.version}"
+            released = new Date()
+            vcsTag = this.version
+        }
+    }
+}
